@@ -1,0 +1,4 @@
+${PODS_ROOT}/Target Support Files/Pods-Fridge/Pods-Fridge-frameworks.sh
+${BUILT_PRODUCTS_DIR}/Realm/Realm.framework
+${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework
+${BUILT_PRODUCTS_DIR}/SideMenu/SideMenu.framework
