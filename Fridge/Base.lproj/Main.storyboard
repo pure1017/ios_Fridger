@@ -257,19 +257,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dhw-cQ-i46">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AEP-iz-pvX">
                                 <rect key="frame" x="20" y="64" width="374" height="70"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="70" id="tLi-og-mYF"/>
+                                    <constraint firstAttribute="height" constant="70" id="nhg-1d-7HG"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Hd-up-i0T">
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kts-h2-Hci">
                                 <rect key="frame" x="20" y="144" width="374" height="70"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="70" id="SgR-rP-m9a"/>
+                                    <constraint firstAttribute="height" constant="70" id="e9s-jp-rKk"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -279,17 +278,17 @@
                         <viewLayoutGuide key="safeArea" id="yIA-yR-1R1"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="dhw-cQ-i46" firstAttribute="top" secondItem="yIA-yR-1R1" secondAttribute="top" constant="20" id="FD8-sP-e4p"/>
-                            <constraint firstItem="9Hd-up-i0T" firstAttribute="top" secondItem="dhw-cQ-i46" secondAttribute="bottom" constant="10" id="XXb-PE-a6L"/>
-                            <constraint firstItem="9Hd-up-i0T" firstAttribute="leading" secondItem="yIA-yR-1R1" secondAttribute="leading" constant="20" id="bJD-xr-Qd9"/>
-                            <constraint firstItem="yIA-yR-1R1" firstAttribute="trailing" secondItem="dhw-cQ-i46" secondAttribute="trailing" constant="20" id="ltf-Vg-qL0"/>
-                            <constraint firstItem="yIA-yR-1R1" firstAttribute="trailing" secondItem="9Hd-up-i0T" secondAttribute="trailing" constant="20" id="mLx-eZ-ao9"/>
-                            <constraint firstItem="dhw-cQ-i46" firstAttribute="leading" secondItem="yIA-yR-1R1" secondAttribute="leading" constant="20" id="umX-81-6wR"/>
+                            <constraint firstItem="AEP-iz-pvX" firstAttribute="top" secondItem="yIA-yR-1R1" secondAttribute="top" constant="20" id="Hzp-QD-BWc"/>
+                            <constraint firstItem="yIA-yR-1R1" firstAttribute="trailing" secondItem="AEP-iz-pvX" secondAttribute="trailing" constant="20" id="KJS-kn-ixZ"/>
+                            <constraint firstItem="yIA-yR-1R1" firstAttribute="trailing" secondItem="kts-h2-Hci" secondAttribute="trailing" constant="20" id="h0d-SZ-xR4"/>
+                            <constraint firstItem="kts-h2-Hci" firstAttribute="top" secondItem="AEP-iz-pvX" secondAttribute="bottom" constant="10" id="ph7-Gj-5uw"/>
+                            <constraint firstItem="kts-h2-Hci" firstAttribute="leading" secondItem="yIA-yR-1R1" secondAttribute="leading" constant="20" id="qmu-x4-MkW"/>
+                            <constraint firstItem="AEP-iz-pvX" firstAttribute="leading" secondItem="yIA-yR-1R1" secondAttribute="leading" constant="20" id="z5N-1j-Qyj"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="dateLabel" destination="9Hd-up-i0T" id="XBv-23-9T3"/>
-                        <outlet property="itemLabel" destination="dhw-cQ-i46" id="Se2-7T-DSo"/>
+                        <outlet property="dateLabel" destination="kts-h2-Hci" id="zXK-fi-rxq"/>
+                        <outlet property="itemLabel" destination="AEP-iz-pvX" id="4WS-bK-cVh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="L6k-Os-5Ca" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

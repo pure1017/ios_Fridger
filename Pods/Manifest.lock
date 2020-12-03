@@ -1,4 +1,5 @@
 PODS:
+  - Alamofire (5.4.0)
   - Realm (10.1.4):
     - Realm/Headers (= 10.1.4)
   - Realm/Headers (10.1.4)
@@ -7,20 +8,23 @@ PODS:
   - SideMenu (6.5.0)
 
 DEPENDENCIES:
+  - Alamofire (~> 5.2)
   - RealmSwift
   - SideMenu
 
 SPEC REPOS:
   trunk:
+    - Alamofire
     - Realm
     - RealmSwift
     - SideMenu
 
 SPEC CHECKSUMS:
+  Alamofire: 3b6a534a3df22db367e4dedeeca73d1ddfcf0e2f
   Realm: 80f4fb2971ccb9adc27a47d0955ae8e533a7030b
   RealmSwift: 0e566ca714edb377bba8ea0811eafcea0b93734e
   SideMenu: f583187d21c5b1dd04c72002be544b555a2627a2
 
-PODFILE CHECKSUM: c79865d15f615b3f1b52b845afb3660597a624cb
+PODFILE CHECKSUM: 562efc62f1a72e3ff4f1f515dbedf04fc281a784
 
 COCOAPODS: 1.10.0

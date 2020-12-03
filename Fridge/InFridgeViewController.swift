@@ -9,6 +9,14 @@ import RealmSwift
 import UIKit
 
 struct inFrgResponse: Codable {
+//    let itemNum: String
+//    let note: String
+//    let outDate: String
+//    let inDate: String
+//    let expiration: String
+//    let iconUrl: String
+//    let id: String
+//    let mainUrl: String
     let itemName: String
     let expirationDate: String
 }
@@ -94,6 +102,7 @@ class InFridgeViewController: UITableViewController {
         realm.delete(inFrgdata)
         try! realm.commitWrite()
         
+        print("fetching")
         guard let url = URL(string: "https://wdrd6suw5h.execute-api.us-east-1.amazonaws.com/test/get-item") else {
             return
         }
@@ -119,6 +128,8 @@ class InFridgeViewController: UITableViewController {
             strongSelf.tableData.append("date: \(final.expirationDate)")
             
             // add data to inFrgdata
+            print("http responce::::")
+            print(final)
             self!.item = final.itemName
             self!.date = final.expirationDate
             

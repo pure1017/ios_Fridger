@@ -7,5 +7,6 @@ target 'Fridge' do
 
 pod 'RealmSwift'
 pod 'SideMenu'
+pod 'Alamofire', '~> 5.2'
 
 end
