@@ -16,14 +16,14 @@ class ToDoListItem: Object {
 }
 
 class InFrgListItem: Object {
-//    @objc dynamic var itemNum: String = ""
-//    @objc dynamic var note: String = ""
-//    @objc dynamic var outDate: String = ""
-//    @objc dynamic var inDate: String = ""
-//    @objc dynamic var expiration: String = ""
-//    @objc dynamic var iconUrl: String = ""
-//    @objc dynamic var id: String = ""
-//    @objc dynamic var mainUrl: String = ""
+    @objc dynamic var itemNum: String = ""
+    @objc dynamic var note: String = ""
+    @objc dynamic var outDate: String = ""
+    @objc dynamic var inDate: String = ""
+    @objc dynamic var expiration: String = ""
+    @objc dynamic var iconUrl: String = ""
+    @objc dynamic var id: String = ""
+    @objc dynamic var mainUrl: String = ""
     @objc dynamic var item: String = ""
     @objc dynamic var date: Date = Date()
 }

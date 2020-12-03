@@ -30,7 +30,7 @@ class ViewFrgViewController: UIViewController {
         super.viewDidLoad()
 
         itemLabel.text = item?.item
-        dateLabel.text = Self.dateFormatter.string(from: item!.date)
+        //dateLabel.text = Self.dateFormatter.string(from: item!.inDate)
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(didTapDelete))
     }

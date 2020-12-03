@@ -9,16 +9,16 @@ import RealmSwift
 import UIKit
 
 struct inFrgResponse: Codable {
-//    let itemNum: String
-//    let note: String
-//    let outDate: String
-//    let inDate: String
-//    let expiration: String
-//    let iconUrl: String
-//    let id: String
-//    let mainUrl: String
+    let itemNum: String
+    let note: String
+    let outDate: String
+    let inDate: String
+    let expiration: String
+    let iconUrl: URL
+    let id: String
+    let mainURL: URL
     let itemName: String
-    let expirationDate: String
+    //let expiration: String
 }
 
 class InFridgeViewController: UITableViewController {
@@ -26,6 +26,17 @@ class InFridgeViewController: UITableViewController {
     private var tableData = [String]()
     private var item = ""
     private var date = ""
+    private var itemNum = ""
+    private var note = ""
+    private var outDate = ""
+    private var inDate = ""
+    private var expiration = ""
+    private var iconUrl = URL(string: "https://media.istockphoto.com/photos/red-apple-with-leaf-picture-id683494078?k=6&m=683494078&s=612x612&w=0&h=aVyDhOiTwUZI0NeF_ysdLZkSvDD4JxaJMdWSx2p3pp4=")!
+    private var id = ""
+    private var mainURL = URL(string: "https://image.shutterstock.com/image-photo/red-apple-on-white-background-260nw-158989157.jpg")!
+    private var itemName = ""
+    
+    private var result: [inFrgResponse] = []
     
     private let realm = try! Realm()
     
@@ -103,7 +114,7 @@ class InFridgeViewController: UITableViewController {
         try! realm.commitWrite()
         
         print("fetching")
-        guard let url = URL(string: "https://wdrd6suw5h.execute-api.us-east-1.amazonaws.com/test/get-item") else {
+        guard let url = URL(string: "https://wdrd6suw5h.execute-api.us-east-1.amazonaws.com/test/item") else {
             return
         }
         
@@ -112,26 +123,27 @@ class InFridgeViewController: UITableViewController {
                 return
             }
             
-            var result: inFrgResponse?
-            do {
-                result = try JSONDecoder().decode(inFrgResponse.self, from: data)
-            }
-            catch {
-                // handle error
-            }
+//            var result: [inFrgResponse]?
+//            do {
+//                result = try JSONDecoder().decode([inFrgResponse].self, from: data)
+//            }
+//            catch {
+//                // handle error
+//            }
+            self?.result = try! JSONDecoder().decode([inFrgResponse].self, from: data)
             
-            guard let final = result else{
-                return
-            }
-            
-            strongSelf.tableData.append("item: \(final.itemName)")
-            strongSelf.tableData.append("date: \(final.expirationDate)")
+//            guard let final = self?.result.first?.itemNum else{
+//                return
+//            }
+//
+//            strongSelf.tableData.append("item: \(final.itemName)")
+//            strongSelf.tableData.append("date: \(final.expiration)")
             
             // add data to inFrgdata
-            print("http responce::::")
-            print(final)
-            self!.item = final.itemName
-            self!.date = final.expirationDate
+//            print("http responce::::")
+//            print(final)
+//            self!.item = "final.itemName"
+//            self!.date = "final.inDate"
             
             DispatchQueue.main.async {
                 strongSelf.tableView.refreshControl?.endRefreshing()
@@ -139,14 +151,28 @@ class InFridgeViewController: UITableViewController {
             }
         })
         
-        realm.beginWrite()
-        let newItem = InFrgListItem()
-        newItem.date = Date() //////////need to edit
-        newItem.item = item
-        realm.add(newItem)
-        try! realm.commitWrite()
+        for itemData in result {
+            itemNum = itemData.itemNum
+            note = itemData.note
+            outDate = itemData.outDate
+            inDate = itemData.inDate
+            expiration = itemData.expiration
+            iconUrl = itemData.iconUrl
+            id = itemData.id
+            mainURL = itemData.mainURL
+            itemName = itemData.itemName
+            
+            realm.beginWrite()
+            let newItem = InFrgListItem()
+            newItem.date = Date() //////////need to edit
+            newItem.item = itemName
+            realm.add(newItem)
+            try! realm.commitWrite()
+        }
         
-        setNotification(title: newItem.item, date: newItem.date)
+        
+        
+        //setNotification(title: newItem.item, date: newItem.inDate)
         
         task.resume()
     }
