@@ -20,7 +20,6 @@ class ShoppingViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         data = realm.objects(ToDoListItem.self).map({ $0 })
-        print(data)
         return data.count
     }
     
@@ -29,7 +28,6 @@ class ShoppingViewController: UITableViewController {
         
         // Open the screen where we can see item info and delete
         let item = data[indexPath.row]
-        
         guard let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "view") as? ViewViewController else {
             print("not found")
             return
