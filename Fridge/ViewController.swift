@@ -21,9 +21,9 @@ class InFrgListItem: Object {
     @objc dynamic var outDate: String = ""
     @objc dynamic var inDate: String = ""
     @objc dynamic var expiration: String = ""
-    @objc dynamic var iconUrl: String = ""
+    var iconUrl: URL = URL(string: "https://media.istockphoto.com/photos/red-apple-with-leaf-picture-id683494078?k=6&m=683494078&s=612x612&w=0&h=aVyDhOiTwUZI0NeF_ysdLZkSvDD4JxaJMdWSx2p3pp4=")!
     @objc dynamic var id: String = ""
-    @objc dynamic var mainUrl: String = ""
+    var mainUrl: URL = URL(string: "https://image.shutterstock.com/image-photo/red-apple-on-white-background-260nw-158989157.jpg")!
     @objc dynamic var item: String = ""
     @objc dynamic var date: Date = Date()
 }

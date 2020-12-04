@@ -166,6 +166,15 @@ class InFridgeViewController: UITableViewController {
             let newItem = InFrgListItem()
             newItem.date = Date() //////////need to edit
             newItem.item = itemName
+            newItem.itemNum = itemNum
+            newItem.note = note
+            newItem.outDate = outDate
+            newItem.inDate = inDate
+            newItem.expiration = expiration
+            newItem.iconUrl = iconUrl
+            newItem.id = id
+            newItem.mainUrl = mainURL
+            
             realm.add(newItem)
             try! realm.commitWrite()
         }
