@@ -21,9 +21,9 @@ class InFrgListItem: Object {
     @objc dynamic var outDate: String = ""
     @objc dynamic var inDate: String = ""
     @objc dynamic var expiration: String = ""
-    var iconUrl: URL = URL(string: "https://media.istockphoto.com/photos/red-apple-with-leaf-picture-id683494078?k=6&m=683494078&s=612x612&w=0&h=aVyDhOiTwUZI0NeF_ysdLZkSvDD4JxaJMdWSx2p3pp4=")!
+    @objc dynamic var iconUrl: String = ""
     @objc dynamic var id: String = ""
-    var mainUrl: URL = URL(string: "https://image.shutterstock.com/image-photo/red-apple-on-white-background-260nw-158989157.jpg")!
+    @objc dynamic var mainUrl: String = ""
     @objc dynamic var item: String = ""
     @objc dynamic var date: Date = Date()
 }
@@ -90,7 +90,7 @@ class ViewController: UIViewController, MenuControllerDelegate {
 //                let controller = ShoppingViewController()
 //                present(UINavigationController(rootViewController: controller), animated: true, completion: nil)
             case .fridgeList:
-                self.navigationItem.rightBarButtonItem?.tintColor = .systemBlue
+                self.navigationItem.rightBarButtonItem?.tintColor = .clear
                 shoppingController.view.isHidden = true
                 firdgeController.view.isHidden = false
             }

@@ -14,9 +14,9 @@ struct inFrgResponse: Codable {
     let outDate: String
     let inDate: String
     let expiration: String
-    let iconUrl: URL
+    let iconUrl: String
     let id: String
-    let mainURL: URL
+    let mainURL: String
     let itemName: String
     //let expiration: String
 }
@@ -31,9 +31,9 @@ class InFridgeViewController: UITableViewController {
     private var outDate = ""
     private var inDate = ""
     private var expiration = ""
-    private var iconUrl = URL(string: "https://media.istockphoto.com/photos/red-apple-with-leaf-picture-id683494078?k=6&m=683494078&s=612x612&w=0&h=aVyDhOiTwUZI0NeF_ysdLZkSvDD4JxaJMdWSx2p3pp4=")!
+    private var iconUrl = ""
     private var id = ""
-    private var mainURL = URL(string: "https://image.shutterstock.com/image-photo/red-apple-on-white-background-260nw-158989157.jpg")!
+    private var mainURL = ""
     private var itemName = ""
     
     private var result: [inFrgResponse] = []
