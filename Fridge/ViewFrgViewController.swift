@@ -113,6 +113,30 @@ class ViewFrgViewController: UIViewController {
             let cal_outDate = Calendar.current.date(byAdding: .day, value: Int(expiration!) ?? 0, to: inDateLabel.date)!
             let outDate = formatter.string(from: cal_outDate)
             
+            //notification
+            UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound], completionHandler: { success, error in
+                if success {
+                    
+                    let content = UNMutableNotificationContent()
+                    content.title = "Expire Warning"
+                    content.sound = .default
+                    content.body = "Please have a look at your " + text
+                    
+                    let targetDate = cal_outDate
+                    let trigger = UNCalendarNotificationTrigger(dateMatching: Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second],from: targetDate),repeats: false)
+
+                    let request = UNNotificationRequest(identifier: "some_long_id", content: content, trigger: trigger)
+                    UNUserNotificationCenter.current().add(request, withCompletionHandler: { error in
+                        if error != nil {
+                            print("something went wrong")
+                        }
+                    })
+                }
+                else if error != nil {
+                    print("error occered")
+                }
+            })
+            
             realm.beginWrite()
 //            let newItem = InFrgListItem()
             myItem.date = Date() //////////need to edit
