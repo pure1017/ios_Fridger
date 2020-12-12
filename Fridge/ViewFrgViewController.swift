@@ -15,7 +15,7 @@ class ViewFrgViewController: UIViewController {
     public var deletionHandler: (() -> Void)?
     
     @IBOutlet var itemLabel: UITextField!
-    @IBOutlet var noteText: UITextField!
+    @IBOutlet var noteText: UITextView!
     @IBOutlet var outDateLabel: UILabel!
     @IBOutlet var inDateLabel: UILabel!
     @IBOutlet var expirationLabel: UITextField!
