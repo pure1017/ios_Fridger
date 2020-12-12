@@ -20,6 +20,7 @@
 		CB5E4A9A2574ED2800B84065 /* SideMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB5E4A992574ED2800B84065 /* SideMenu.swift */; };
 		CB5E4A9D2574ED3B00B84065 /* ShoppingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB5E4A9C2574ED3B00B84065 /* ShoppingViewController.swift */; };
 		CB5E4AA02574ED8400B84065 /* InFridgeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB5E4A9F2574ED8400B84065 /* InFridgeViewController.swift */; };
+		CB73BDEE2584B74A002BD4F0 /* EntryFriViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB73BDED2584B74A002BD4F0 /* EntryFriViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		CB5E4A992574ED2800B84065 /* SideMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenu.swift; sourceTree = "<group>"; };
 		CB5E4A9C2574ED3B00B84065 /* ShoppingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingViewController.swift; sourceTree = "<group>"; };
 		CB5E4A9F2574ED8400B84065 /* InFridgeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InFridgeViewController.swift; sourceTree = "<group>"; };
+		CB73BDED2584B74A002BD4F0 /* EntryFriViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryFriViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +107,7 @@
 				CB4A60A825773A810021F44A /* EntryViewController.swift */,
 				CB4A60AB257746F10021F44A /* ViewViewController.swift */,
 				CB4A60AE25776EA10021F44A /* ViewFrgViewController.swift */,
+				CB73BDED2584B74A002BD4F0 /* EntryFriViewController.swift */,
 			);
 			path = Fridge;
 			sourceTree = "<group>";
@@ -232,6 +235,7 @@
 				CB4A60AC257746F10021F44A /* ViewViewController.swift in Sources */,
 				CB5E4A9A2574ED2800B84065 /* SideMenu.swift in Sources */,
 				CB5E4A9D2574ED3B00B84065 /* ShoppingViewController.swift in Sources */,
+				CB73BDEE2584B74A002BD4F0 /* EntryFriViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -90,7 +90,7 @@ class ViewController: UIViewController, MenuControllerDelegate {
 //                let controller = ShoppingViewController()
 //                present(UINavigationController(rootViewController: controller), animated: true, completion: nil)
             case .fridgeList:
-                self.navigationItem.rightBarButtonItem?.tintColor = .clear
+                self.navigationItem.rightBarButtonItem?.tintColor = .systemBlue
                 shoppingController.view.isHidden = true
                 firdgeController.view.isHidden = false
             }
@@ -136,6 +136,14 @@ class ViewController: UIViewController, MenuControllerDelegate {
                 }
             }
             navigationController?.pushViewController(vc, animated: true)
+        }
+        else if firdgeController.view.isHidden == false {
+            guard let vc = storyboard?.instantiateViewController(identifier: "enterFri") as? EntryFriViewController else {
+                return
+            }
+            
+            vc.title = "New Item"
+            
         }
     }
     

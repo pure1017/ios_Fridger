@@ -88,12 +88,16 @@ class InFridgeViewController: UITableViewController {
             cell = UITableViewCell(style: .subtitle, reuseIdentifier: "cell")
         }
         cell.textLabel?.text = inFrgdata[indexPath.row].item
-        
-        let date = inFrgdata[indexPath.row].date
 
         let formatter = DateFormatter()
         formatter.dateFormat = "MMM, dd, YYYY"
-        cell.detailTextLabel?.text = formatter.string(from: date)
+        
+        let input_inDate = inFrgdata[indexPath.row].inDate
+        
+        let formatter2 = DateFormatter()
+        formatter2.dateFormat = "yyyy-MM-dd"
+        let inDate = formatter2.date(from: input_inDate)
+        cell.detailTextLabel?.text = formatter.string(from: inDate!)
         
         cell.textLabel?.font = UIFont(name: "Arial", size: 25)
         cell.detailTextLabel?.font = UIFont(name: "Arial", size: 15)

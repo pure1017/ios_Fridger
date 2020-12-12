@@ -17,7 +17,7 @@ class ViewFrgViewController: UIViewController {
     @IBOutlet var itemLabel: UITextField!
     @IBOutlet var noteText: UITextView!
     @IBOutlet var outDateLabel: UILabel!
-    @IBOutlet var inDateLabel: UILabel!
+    @IBOutlet var inDateLabel: UIDatePicker!
     @IBOutlet var expirationLabel: UITextField!
     @IBOutlet var itemNumLabel: UITextField!
     @IBOutlet var imageView: UIImageView!
@@ -36,11 +36,16 @@ class ViewFrgViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        let inDate = formatter.date(from: item!.inDate)!
+        
         itemLabel.text = item?.item
         noteText.text = item?.note
         outDateLabel.text = item?.outDate
-        inDateLabel.text = item?.inDate
+//        inDateLabel.text = item?.inDate
+        inDateLabel.setDate(inDate, animated: true)
         expirationLabel.text = item?.expiration
         itemNumLabel.text = item?.itemNum
         let imageData = try? Data(contentsOf: URL(string: item!.mainUrl)!)
@@ -102,14 +107,20 @@ class ViewFrgViewController: UIViewController {
             let note = noteText.text
             let expiration = expirationLabel.text
             
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyy-MM-dd"
+            let inDate = formatter.string(from: inDateLabel.date)
+            let cal_outDate = Calendar.current.date(byAdding: .day, value: Int(expiration!) ?? 0, to: inDateLabel.date)!
+            let outDate = formatter.string(from: cal_outDate)
+            
             realm.beginWrite()
 //            let newItem = InFrgListItem()
             myItem.date = Date() //////////need to edit
             myItem.item = text
             myItem.itemNum = itemNum!
             myItem.note = item!.note
-            myItem.outDate = item!.outDate
-            myItem.inDate = item!.inDate
+            myItem.outDate = outDate
+            myItem.inDate = inDate
             myItem.expiration = expiration!
             myItem.iconUrl = item!.iconUrl
             myItem.id = item!.id
