@@ -179,6 +179,18 @@ class ViewController: UIViewController, MenuControllerDelegate {
         }
     }
     
+    @IBAction func didTapSendButton() {
+        guard let url = URL(string: "http://192.168.2.170/send") else {
+            return
+        }
+        let task = URLSession.shared.dataTask(with: url) {(data, response, error) in
+            guard let data = data else { return }
+            print(String(data: data, encoding: .utf8)!)
+        }
+
+        task.resume()
+    }
+    
 //    @IBAction func didTapTest() {
 //            // fire test notification
 //            UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound], completionHandler: { success, error in
