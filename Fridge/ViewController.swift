@@ -143,6 +143,38 @@ class ViewController: UIViewController, MenuControllerDelegate {
             }
             
             vc.title = "New Item"
+            vc.navigationItem.largeTitleDisplayMode = .never
+            vc.completionHandler = { title, cal_outDate in
+                DispatchQueue.main.async {
+                    self.navigationController?.popToRootViewController(animated: true)
+                    UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound], completionHandler: { success, error in
+                        if success {
+                            
+                            let content = UNMutableNotificationContent()
+                            content.title = title
+                            content.sound = .default
+                            content.body = "Please have a look"
+                            
+                            let targetDate = cal_outDate
+                            let trigger = UNCalendarNotificationTrigger(dateMatching: Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second],from: targetDate),repeats: false)
+
+                            let request = UNNotificationRequest(identifier: "some_long_id", content: content, trigger: trigger)
+                            UNUserNotificationCenter.current().add(request, withCompletionHandler: { error in
+                                if error != nil {
+                                    print("something went wrong")
+                                }
+                            })
+                        }
+                        else if error != nil {
+                            print("error occered")
+                        }
+                    })
+                
+                    self.shoppingController.data = self.realm.objects(ToDoListItem.self).map({ $0 })
+                    self.shoppingController.tableView.reloadData()
+                }
+            }
+            navigationController?.pushViewController(vc, animated: true)
             
         }
     }

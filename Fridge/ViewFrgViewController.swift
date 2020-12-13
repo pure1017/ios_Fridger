@@ -49,6 +49,7 @@ class ViewFrgViewController: UIViewController {
         expirationLabel.text = item?.expiration
         itemNumLabel.text = item?.itemNum
         let imageData = try? Data(contentsOf: URL(string: item!.mainUrl)!)
+        print(item!.mainUrl)
         imageView.image = UIImage(data: imageData!)
         //dateLabel.text = Self.dateFormatter.string(from: item!.inDate)
         
