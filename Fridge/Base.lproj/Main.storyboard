@@ -346,7 +346,7 @@
                                 <rect key="frame" x="160" y="686" width="94" height="30"/>
                                 <state key="normal" title="Upload Photo"/>
                                 <connections>
-                                    <action selector="didTapButton" destination="SNH-6c-7d8" eventType="touchUpInside" id="qq5-JQ-0rA"/>
+                                    <action selector="selectImageButtonAction:" destination="SNH-6c-7d8" eventType="touchUpInside" id="bfS-oD-Fkl"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -397,6 +397,7 @@
                         <outlet property="itemCountFeild" destination="J7f-Fy-nh5" id="HUK-1Q-peC"/>
                         <outlet property="itemNameFeild" destination="Mws-gb-ZTr" id="KhE-28-o3T"/>
                         <outlet property="noteText" destination="GpI-yf-bxA" id="3xN-zu-RCq"/>
+                        <outlet property="selectImageButton" destination="8NP-tY-3RX" id="AYX-Qx-22x"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="csd-V6-zhK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

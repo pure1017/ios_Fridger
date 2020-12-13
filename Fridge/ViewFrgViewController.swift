@@ -33,6 +33,13 @@ class ViewFrgViewController: UIViewController {
         dateFormatter.dateStyle = .medium
         return dateFormatter
     }()
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+
+        self.itemLabel.resignFirstResponder()
+        self.expirationLabel.resignFirstResponder()
+        self.noteText.resignFirstResponder()
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,8 +55,8 @@ class ViewFrgViewController: UIViewController {
         inDateLabel.setDate(inDate, animated: true)
         expirationLabel.text = item?.expiration
         itemNumLabel.text = item?.itemNum
-        let imageData = try? Data(contentsOf: URL(string: item!.mainUrl)!)
         print(item!.mainUrl)
+        let imageData = try? Data(contentsOf: URL(string: item!.mainUrl)!)
         imageView.image = UIImage(data: imageData!)
         //dateLabel.text = Self.dateFormatter.string(from: item!.inDate)
         

@@ -87,6 +87,11 @@ class InFridgeViewController: UITableViewController {
         if cell.detailTextLabel == nil {
             cell = UITableViewCell(style: .subtitle, reuseIdentifier: "cell")
         }
+        
+//        if (inFrgdata[indexPath.row].item != "") {
+//            cell.textLabel?.text = inFrgdata[indexPath.row].item
+//        }
+        
         cell.textLabel?.text = inFrgdata[indexPath.row].item
 
         let formatter = DateFormatter()

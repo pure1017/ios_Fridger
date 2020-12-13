@@ -9,7 +9,9 @@ import RealmSwift
 import UIKit
 
 class EntryFriViewController: UIViewController, UITextFieldDelegate {
-
+    
+    public var imagePickerController: UIImagePickerController?
+    
     @IBOutlet var itemNameFeild: UITextField!
     @IBOutlet var itemCountFeild: UITextField!
     @IBOutlet var inDatePicker: UIDatePicker!
@@ -22,16 +24,44 @@ class EntryFriViewController: UIViewController, UITextFieldDelegate {
     private let realm = try! Realm()
     public var completionHandler: ((String, Date) -> Void)?
     
+    internal var selectedImage: UIImage? {
+            get {
+                return self.imageView.image
+            }
+            
+            set {
+                switch newValue {
+                case nil:
+                    self.imageView.image = nil
+                default:
+                    self.imageView.image = newValue
+                    
+                }
+            }
+        }
+    
+    // to store the current active textfield
+    var activeTextField : UITextField? = nil
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         itemNameFeild.becomeFirstResponder()
         itemNameFeild.delegate = self
+        //itemCountFeild.delegate = self
         inDatePicker.setDate(Date(), animated: true)
         expirationDay.text = "3"
         noteText.text = "please enter your note here"
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .done, target: self, action: #selector(didTapSavedButton))
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+
+        self.itemNameFeild.resignFirstResponder()
+        self.itemCountFeild.resignFirstResponder()
+        self.expirationDay.resignFirstResponder()
+        self.noteText.resignFirstResponder()
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -104,28 +134,77 @@ class EntryFriViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    @IBAction func didTapButton() {
-        let vc = UIImagePickerController()
-        vc.sourceType = .photoLibrary
-        vc.delegate = self
-        vc.allowsEditing = true
-        present(vc, animated: true)
+    @IBOutlet weak var selectImageButton: UIButton! {
+        didSet {
+            guard let button = self.selectImageButton else { return }
+            button.isEnabled = true
+            button.alpha = 1
+        }
     }
+    
+    @IBAction func selectImageButtonAction(_ sender: UIButton) {
+        /// present image picker
+        
+        if self.imagePickerController != nil {
+            self.imagePickerController?.delegate = nil
+            self.imagePickerController = nil
+        }
+        
+        self.imagePickerController = UIImagePickerController.init()
+        
+        let alert = UIAlertController.init(title: "Select Source Type", message: nil, preferredStyle: .actionSheet)
+        
+        print(UIImagePickerController.isSourceTypeAvailable(.camera))
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+            alert.addAction(UIAlertAction.init(title: "Camera", style: .default, handler: { (_) in
+                self.presentImagePicker(controller: self.imagePickerController!, source: .camera)
+            }))
+        }
+        
+        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
+            alert.addAction(UIAlertAction.init(title: "Photo Library", style: .default, handler: { (_) in
+                self.presentImagePicker(controller: self.imagePickerController!, source: .photoLibrary)
+            }))
+        }
+        
+        if UIImagePickerController.isSourceTypeAvailable(.savedPhotosAlbum) {
+            alert.addAction(UIAlertAction.init(title: "Saved Albums", style: .default, handler: { (_) in
+                self.presentImagePicker(controller: self.imagePickerController!, source: .savedPhotosAlbum)
+            }))
+        }
+        alert.addAction(UIAlertAction.init(title: "Cancel", style: .cancel))
+        
+        self.present(alert, animated: true)
+    }
+    
+    internal func presentImagePicker(controller: UIImagePickerController , source: UIImagePickerController.SourceType) {
+            controller.delegate = self
+            controller.sourceType = source
+            self.present(controller, animated: true)
+        }
 }
 
 extension EntryFriViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
-        if let image = info[UIImagePickerController.InfoKey(rawValue: "UIImagePickerControllerEditedImage")] as? UIImage {
-            imageView.image = image
+        guard let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else {
+            return self.imagePickerControllerDidCancel(picker)
         }
-        
-        picker.dismiss(animated: true, completion: nil)
+                
+        self.selectedImage = image
+            
+        picker.dismiss(animated: true) {
+            picker.delegate = nil
+            self.imagePickerController = nil
+        }
         
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        picker.dismiss(animated: true, completion: nil)
+        picker.dismiss(animated: true) {
+            picker.delegate = nil
+            self.imagePickerController = nil
+        }
     }
 }

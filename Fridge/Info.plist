@@ -64,5 +64,7 @@
 	</array>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Please allow access to your photo</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Please allow access to take pictures for this app.</string>
 </dict>
 </plist>
