@@ -8,15 +8,15 @@
 import RealmSwift
 import UIKit
 
-class EntryFriViewController: UIViewController, UITextFieldDelegate {
+class EntryFriViewController: UIViewController {
     
     public var imagePickerController: UIImagePickerController?
     
-    @IBOutlet var itemNameFeild: UITextField!
-    @IBOutlet var itemCountFeild: UITextField!
+    @IBOutlet weak var itemNameFeild: UITextField!
+    @IBOutlet weak var itemCountFeild: UITextField!
     @IBOutlet var inDatePicker: UIDatePicker!
-    @IBOutlet var expirationDay: UITextField!
-    @IBOutlet var noteText: UITextView!
+    @IBOutlet weak var expirationDay: UITextField!
+    @IBOutlet weak var noteText: UITextView!
     @IBOutlet var imageView: UIImageView!
     
     private let url = URL(string: "https://wdrd6suw5h.execute-api.us-east-1.amazonaws.com/test/item/0")!
@@ -42,16 +42,24 @@ class EntryFriViewController: UIViewController, UITextFieldDelegate {
     
     // to store the current active textfield
     var activeTextField : UITextField? = nil
+    var activeTextView : UITextView? = nil
+    
+    public var height = CGFloat(0)
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         itemNameFeild.becomeFirstResponder()
         itemNameFeild.delegate = self
-        //itemCountFeild.delegate = self
+        itemCountFeild.delegate = self
+        expirationDay.delegate = self
+        noteText.delegate = self
         inDatePicker.setDate(Date(), animated: true)
         expirationDay.text = "3"
         noteText.text = "please enter your note here"
+        
+        // call the 'keyboardWillShow' function when the view controller receive notification that keyboard is going to be shown
+        NotificationCenter.default.addObserver(self, selector: #selector(EntryFriViewController.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .done, target: self, action: #selector(didTapSavedButton))
     }
@@ -62,6 +70,7 @@ class EntryFriViewController: UIViewController, UITextFieldDelegate {
         self.itemCountFeild.resignFirstResponder()
         self.expirationDay.resignFirstResponder()
         self.noteText.resignFirstResponder()
+        self.view.frame.origin.y = 0
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -69,6 +78,17 @@ class EntryFriViewController: UIViewController, UITextFieldDelegate {
         return true
     }
     
+    @objc func keyboardWillShow(notification: NSNotification) {
+
+        guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
+
+            // if keyboard size is not available for some reason, dont do anything
+            return
+        }
+        
+        height = keyboardSize.height
+    }
+
     func imageToBase64(_ image: UIImage) -> String? {
         return "base64,"+(image.jpegData(compressionQuality: 1)?.base64EncodedString())! 
         }
@@ -206,5 +226,34 @@ extension EntryFriViewController: UIImagePickerControllerDelegate, UINavigationC
             picker.delegate = nil
             self.imagePickerController = nil
         }
+    }
+}
+
+extension EntryFriViewController : UITextFieldDelegate {
+    // when user select a textfield, this method will be called
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        // set the activeTextField to the selected textfield
+        self.activeTextField = textField
+    }
+    
+    // when user click 'done' or dismiss the keyboard
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        self.activeTextField = nil
+    }
+}
+
+extension EntryFriViewController : UITextViewDelegate {
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        // set the activeTextField to the selected textfield
+        self.activeTextView = textView
+        let bottomOfTextView = self.activeTextView!.convert(self.activeTextView!.bounds, to: self.view).maxY;
+        let topOfKeyboard = self.view.frame.height - height
+        if bottomOfTextView > topOfKeyboard {
+            self.view.frame.origin.y = 0 - height
+        }
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        self.activeTextView = nil
     }
 }

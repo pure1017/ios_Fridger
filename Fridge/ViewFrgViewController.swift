@@ -34,15 +34,29 @@ class ViewFrgViewController: UIViewController {
         return dateFormatter
     }()
     
+    // to store the current active textfield
+    var activeTextField : UITextField? = nil
+    var activeTextView : UITextView? = nil
+    
+    public var height = CGFloat(0)
+    
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
 
         self.itemLabel.resignFirstResponder()
         self.expirationLabel.resignFirstResponder()
+        self.itemNumLabel.resignFirstResponder()
         self.noteText.resignFirstResponder()
+        self.view.frame.origin.y = 0
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        expirationLabel.delegate = self
+        noteText.delegate = self
+        
+        // call the 'keyboardWillShow' function when the view controller receive notification that keyboard is going to be shown
+        NotificationCenter.default.addObserver(self, selector: #selector(EntryFriViewController.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
@@ -62,6 +76,18 @@ class ViewFrgViewController: UIViewController {
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(didTapDelete))
     }
+    
+    @objc func keyboardWillShow(notification: NSNotification) {
+
+        guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
+
+            // if keyboard size is not available for some reason, dont do anything
+            return
+        }
+        
+        height = keyboardSize.height
+    }
+
     
     @objc private func didTapDelete() {
         guard let myItem = self.item else {
@@ -206,4 +232,40 @@ class ViewFrgViewController: UIViewController {
         }
     }
     
+}
+
+extension ViewFrgViewController : UITextFieldDelegate {
+    // when user select a textfield, this method will be called
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        // set the activeTextField to the selected textfield
+        self.activeTextField = textField
+        let bottomOfTextField = self.activeTextField!.convert(self.activeTextField!.bounds, to: self.view).maxY;
+        let topOfKeyboard = self.view.frame.height - height
+        if bottomOfTextField > topOfKeyboard {
+            self.view.frame.origin.y = 0 - height
+        }
+    }
+    
+    // when user click 'done' or dismiss the keyboard
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        self.activeTextField = nil
+    }
+}
+
+extension ViewFrgViewController : UITextViewDelegate {
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        // set the activeTextField to the selected textfield
+        print("begin")
+        self.activeTextView = textView
+        let bottomOfTextView = self.activeTextView!.convert(self.activeTextView!.bounds, to: self.view).maxY;
+        let topOfKeyboard = self.view.frame.height - height
+        if bottomOfTextView > topOfKeyboard {
+            self.view.frame.origin.y = 0 - height
+        }
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        print("end")
+        self.activeTextView = nil
+    }
 }
