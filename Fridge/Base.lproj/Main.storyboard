@@ -23,7 +23,7 @@
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YBP-iI-byy">
-                                <rect key="frame" x="130" y="616" width="156" height="30"/>
+                                <rect key="frame" x="129" y="616" width="156" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Ask IoT to Take Picture">
                                     <color key="titleShadowColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -34,7 +34,7 @@
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="rVN-9G-kGw" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="50" id="Nld-9q-Nsq"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="rVN-9G-kGw" secondAttribute="trailing" constant="50" id="ZiX-O3-rsI"/>
@@ -346,7 +346,7 @@
                                 <viewLayoutGuide key="contentLayoutGuide" id="oCU-O2-i4P"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="efR-iD-onz"/>
                             </scrollView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gHe-t8-IwF">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default" translatesAutoresizingMaskIntoConstraints="NO" id="gHe-t8-IwF">
                                 <rect key="frame" x="87" y="528" width="240" height="128"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="128" id="YIC-4J-cIi"/>
@@ -620,7 +620,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Image" width="121" height="145"/>
+        <image name="Image" width="366" height="428"/>
+        <image name="default" width="228" height="221"/>
         <image name="line.horizontal.3" catalog="system" width="128" height="64"/>
         <image name="plus" catalog="system" width="128" height="113"/>
         <systemColor name="labelColor">
